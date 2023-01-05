@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+
+<!--    values-v21目录是只有Android-->
+<!--    5.0及以上的系统-->
+<resources>
+    <style name="FruitActivityTheme" parent="Theme.AS40_MaterialTest">
+<!--        //将状态栏的颜色指定成透明色-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+</resources>

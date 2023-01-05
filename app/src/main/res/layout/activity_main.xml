@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--    抽屉布局效果-->
+
+<!-- 使用安卓的资源进行设置：   xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!-- 使用自己导入的自定义视图的自定义设置：   xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+<!--        1.主菜单显示的布局：CoordinatorLayout布局可以自己调整内部组件位置
+            当RecyclerView滚动的时候就已经将滚动事件都通知给AppBarLayout-->
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+
+        <!--        AppBarLayout实际上是一个垂直方向的LinearLayout，配合recyclerview，
+    只要在recyclerview加入app:layout_behavior="@string/appbar_scrolling_view_behavior"行为，
+    就可以让recyclerview，不覆盖AppBarLayout里面的视图
+    它在内部做了很多滚动事件的封装，
+
+
+    AppBarLayout还可以对其里面的视图进行Material Design的设计
+    app:layout_scrollFlags 属性，并将这个属性的值指定成了scroll|enterAlways|snap,进行
+    scroll 表示当RecyclerView向上滚动的时候，Toolbar会跟着一起向上滚动并实现隐藏；
+    enterAlways 表示当RecyclerView向下滚动的时候，Toolbar会跟着一起向下滚动并重新显示。
+    snap 表示当Toolbar还没有完全隐藏或显示的时候，会根据当前滚动的距离，自动选择是隐藏还是显示-->
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_scrollFlags="scroll|enterAlways|snap"/>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+
+
+
+
+
+
+<!--      下拉刷新,  里面指定包裹需要刷新的视图-->
+<!--        由于RecyclerView现在变成了SwipeRefreshLayout-->
+<!--        的子控件，因此之前使用app:layout_behavior 声明的布局行为现在也要移到-->
+<!--        SwipeRefreshLayout中才行。-->
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!--        滑动布局-->
+            <!--  app:layout_behavior属性指定了一个布局行为-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+
+
+    <!--        悬浮按钮-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_done"
+            app:elevation="88dp"
+            android:contentDescription="TODO" />
+
+
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
+
+
+
+
+
+<!--    NavigationView通常是跟DrawerLayout一起使用,进行抽屉布局上下分层形式-->
+<!--    滑动菜单显示的内容，没有限定死里面的view，可以为其他-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+
+
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu"
+
+
+
+        />
+
+
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
